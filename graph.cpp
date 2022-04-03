@@ -58,6 +58,21 @@ class Graph
             _edgesByWeight.insert({ weight, {nodeDest, nodeSource}});
         }
     }
+    
+    void addDirectedEdge(Node* nodeSource, Node* nodeDest, int weight)
+    {
+        bool existsNodeSource = std::find(_nodes.begin(), _nodes.end(), nodeSource) != _nodes.end();
+        bool existsNodeDest = std::find(_nodes.begin(), _nodes.end(), nodeDest) != _nodes.end();
+
+        if (existsNodeSource && existsNodeDest)
+        {
+            _adjList.insert( { nodeSource , nodeDest });
+
+            _edgeWeights.insert({ {nodeSource, nodeDest}, weight } );
+
+            _edgesByWeight.insert({ weight, {nodeSource, nodeDest}});
+        }
+    }
 
     Node* getNode(const T& data)
     {
