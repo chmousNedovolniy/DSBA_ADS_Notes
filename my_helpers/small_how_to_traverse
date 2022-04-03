@@ -1,0 +1,101 @@
+// вспомогательная функция
+void recursive_DFS(Graph<int>& graph, typename Graph<int>::Node* current, std::vector<int>& visited) {
+    visited[current->data] = 1;
+    auto neighbours = graph.getNeighbors(current);
+    for (auto to : neighbours) {
+        if (!visited[to->data]) {
+            recursive_DFS(graph, to, visited);
+        }
+    }
+}
+
+// данный ДФС используется для нахождения всех вершин, которые мы посетили при обходе из стартовой
+std::vector<int> DFS(Graph<int>& graph, int start) {
+    std::vector<int> visited(graph.getNodes().size(), 0);
+    recursive_DFS(graph, graph.getNode(start), visited);
+    return visited;
+}
+
+// его итеративная версия
+std::vector<int> iterative_DFS(Graph<int>& graph, int start)
+{
+    std::stack<int> stack;
+    std::vector<int> visited(graph.getNodes().size(), 0);
+    stack.push(start);
+
+    while(!stack.empty())
+    {
+        int current = stack.top();
+        stack.pop();
+        if(!visited[current])
+        {
+            visited[current] = 1;
+            auto neighbours = graph.getNeighbors(graph.getNode(current));
+            for (auto to : neighbours) {
+                if (!visited[to->data]) {
+                    stack.push(to->data);
+                }
+            }
+        }
+    }
+
+    return visited;
+}
+
+// BFS для поиска расстояния между двумя вершинами
+int BFS(Graph<int>& graph, int start, int end) {
+    std::vector<int> visited(graph.getNodes().size(), 0);
+    std::vector<int> dist(graph.getNodes().size(), -1);
+    std::queue<int> q;
+    q.push(start);
+    visited[start] = 1;
+    dist[start] = 0;
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+        auto neighbours = graph.getNeighbors(graph.getNode(current));
+        for (auto to : neighbours) {
+            if (!visited[to->data]) {
+                visited[to->data] = 1;
+                q.push(to->data);
+                dist[to->data] = dist[current] + graph.getEdgeWeight(graph.getNode(current), to);
+            }
+        }
+    }
+    return dist[end];
+}
+
+int main()
+{
+    int node_count, edge_count;
+    std::cin >> node_count >> edge_count;
+    Graph<int> graph;
+
+    std::vector<Graph<int>::Node*> nodes(node_count);
+    for (int i = 0; i < node_count; ++i) {
+        nodes[i] = graph.addNode(i);
+    }
+
+    for (int i = 0; i < edge_count; ++i) {
+        int from, to;
+        int weight;
+        std::cin >> from >> to >> weight;
+        graph.addEdge(nodes[from], nodes[to], weight);
+    }
+
+    auto a = DFS(graph, 0);
+    for (auto elem : a) {
+        std::cout << elem << ' ';
+    }
+    std::cout << '\n';
+
+    auto b = iterative_DFS(graph, 0);
+    for (auto elem : b) {
+        std::cout << elem << ' ';
+    }
+    std::cout << '\n';
+
+    std::cout << BFS(graph, 0, 3) << '\n';
+
+    return 0;
+}
