@@ -65,6 +65,52 @@ int BFS(Graph<int>& graph, int start, int end) {
     return dist[end];
 }
 
+bool isVisited(Graph<int>::Node* x, std::vector<Graph<int>::Node*>& path)
+{
+    for (int i = 0; i < path.size(); i++)
+        if (path[i] == x)
+            return true;
+    return false;
+}
+
+// BFS для поиска пути между двумя вершинами
+std::vector<Graph<int>::Node*> bfs(Graph<int>& graph, int start, int end)
+{
+    Graph<int>::Node* source = graph.getNode(start);
+    Graph<int>::Node* sink = graph.getNode(end);
+    std::queue<std::vector<Graph<int>::Node*>> q;
+
+    std::vector<Graph<int>::Node*> path;
+
+    path.push_back(source);
+
+    q.push(path);
+
+    while(!q.empty())
+    {
+        path = q.front();
+
+        q.pop();
+
+        Graph<int>::Node* lastNode = path[path.size() - 1];
+
+        if (lastNode == sink)
+            break;
+
+        for (auto v : graph.getNeighbors(lastNode))
+        {
+            if (!isVisited(v,path))
+            {
+                std::vector<Graph<int>::Node*> newPath(path);
+                newPath.push_back(v);
+                q.push(newPath);
+            }
+        }
+
+    }
+    return path;
+}
+
 int main()
 {
     int node_count, edge_count;
@@ -97,5 +143,10 @@ int main()
 
     std::cout << BFS(graph, 0, 3) << '\n';
 
+    auto path = bfs(graph, 0, 3);
+    for (auto v : path) {
+        std::cout << v->data << ' ';
+    }
+    std::cout << '\n';
     return 0;
 }
