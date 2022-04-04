@@ -1,4 +1,4 @@
-// Works like Deijkstra algo, finds all  dists between startNode and other nodes, returns them in map
+// Works like Dijkstra algo, finds all  dists between startNode and other nodes, returns them in map
 std::map<Node*, int> BellmanFord(MyGraph& graph, Node* startNode, Node* endNode) {
     std::map<Node*, int> distance;
 
