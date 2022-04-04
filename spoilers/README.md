@@ -17,3 +17,11 @@
 - [Алгоритм Дейкстры](slides/dejikstra.pdf)
 - [Алгоритм Флойда-Уоршелла](slides/floyd.pdf)
 - [Алгоритм Беллмана-Форда и поиск отрицательных циклов](slides/bellman-ford.pdf)
+
+Примечания
+1. Везде, где используются обозначения MyGraph или Node, подразумевается, что после кода графа написано
+```
+using MyGraph = Graph<int>; // or Graph<std::string>
+using Node = Graph<int>::Node; // or Graph<std::string>::Node
+// or any other type in <> actually
+```
