@@ -43,7 +43,7 @@ using MyGraph = Graph<std::string>;
 
 // Deijkstra, takes graph, starting end ending nodes, and empty vector path
 // returns map of distances between startNode and all other nodes
-// fillsv vector path with nodes on shortest path between startNode and endNode
+// fills vector path with nodes on shortest path between startNode and endNode
 std::map<Node*, int> dijkstra(MyGraph& graph, Node* startNode, Node* endNode, std::vector<Node*>& path) {
     std::map<Node*, int> distance;
     std::map<Node*, Node*> parentMap;
@@ -93,7 +93,7 @@ int main() {
 
     // printing all distances between startNode and other nodes
     for (auto pair: distance) {
-        std::cout << pair.first->data << " :" << pair.second << std::endl;
+        std::cout << pair.first->data << " : " << pair.second << std::endl;
     }
 
     // printing path between startNode and endNode
