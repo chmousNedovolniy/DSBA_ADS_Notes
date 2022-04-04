@@ -51,14 +51,14 @@ std::map<Node*, int> dijkstra(MyGraph& graph, Node* startNode, Node* endNode, st
     PriorityQueue<Node*> pq;
     
     for (auto v: graph.getNodes()) {
-        distance[v] = INT_MAX;
+        distance[v] = INT_MAX / 2; // be careful with int overflow, don't do INT_MAX + INT_MAX
         visited[v] = false;
         pq.insert(v, distance[v]);
         parentMap[v] = nullptr;
     }
 
     distance[startNode] = 0;
-    pq.update(startNode, INT_MAX, 0);
+    pq.update(startNode, INT_MAX / 2, 0);
 
     while (!pq.empty()) {
         Node* u = pq.getMin();
@@ -89,7 +89,7 @@ int main() {
     // setting up the graph
 
     std::vector<Node*> path;
-    std::map<Node*, int> distance = dijkstra(graph, startNode, endNode, path);
+    auto distance = dijkstra(graph, startNode, endNode, path);
 
     // printing all distances between startNode and other nodes
     for (auto pair: distance) {
