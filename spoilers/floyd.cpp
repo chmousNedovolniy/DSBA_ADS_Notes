@@ -18,6 +18,16 @@ std::map<std::pair<Node*, Node*>, long long> Floyd(MyGraph& graph) {
     for (auto k : graph.getNodes()) {
         for (auto from : graph.getNodes()) {
             for (auto to : graph.getNodes()) {
+                // if graph has negative weights of edges, than we could observe thigs like INT_MAX - 1 or INT_MAX - other_negative_weight
+                // it can actually make our infinity = INT_MAX not so big and crash the algo, so it's better to use if condition
+                // which checks if some of the nodes is unreachable
+                
+                // So, if graph has negative edge weights, use this
+                // if (dists[{from, k}] < INT_MAX && dists[{k, to}] < INT_MAX) {
+                    // dists[{from, to}] = std::min(dists[{from, to}], dists[{from, k}] + dists[{k, to}]);
+                // }
+                
+                // If no negative edge weights, use this
                 dists[{from, to}] = std::min(dists[{from, to}], dists[{from, k}] + dists[{k, to}]);
             }
         }
