@@ -1,3 +1,10 @@
+UPD:
+---
+Small notes:
+1. Don't use INT_MAX, use sth like const int inf = 1e9; (I've fixed it in Dijkstra.cpp file in repo)
+2. No float results in decreasing, you can just do / 2 with integers;
+3. Pay attention to BUT part of agreement
+
 Здесь постарался собрать всё полезное для заспойлеренных тем на КР, а именно
 
 Код
