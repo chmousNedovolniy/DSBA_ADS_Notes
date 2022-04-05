@@ -41,6 +41,8 @@ private:
 using Node = Graph<std::string>::Node;
 using MyGraph = Graph<std::string>;
 
+const int inf = 1e9; // or sth else
+
 // Dijkstra, takes graph, starting end ending nodes, and empty vector path
 // returns map of distances between startNode and all other nodes
 // fills vector path with nodes on shortest path between startNode and endNode
@@ -51,14 +53,14 @@ std::map<Node*, int> dijkstra(MyGraph& graph, Node* startNode, Node* endNode, st
     PriorityQueue<Node*> pq;
     
     for (auto v: graph.getNodes()) {
-        distance[v] = INT_MAX / 2; // be careful with int overflow, don't do INT_MAX + INT_MAX
+        distance[v] = inf; // be careful with int overflow, don't do INT_MAX + INT_MAX
         visited[v] = false;
         pq.insert(v, distance[v]);
         parentMap[v] = nullptr;
     }
 
     distance[startNode] = 0;
-    pq.update(startNode, INT_MAX / 2, 0);
+    pq.update(startNode, inf, 0);
 
     while (!pq.empty()) {
         Node* u = pq.getMin();
