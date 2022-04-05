@@ -1,4 +1,4 @@
-UPD:
+UPD for Group 204:
 ---
 Small notes:
 1. Don't use INT_MAX, use sth like const int inf = 1e9; (I've fixed it in Dijkstra.cpp file in repo)
