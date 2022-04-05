@@ -1,3 +1,5 @@
+const int inf = 1e9;
+
 // Floyd algo, returns map of shortest dists between all pairs of nodes in graph
 std::map<std::pair<Node*, Node*>, long long> Floyd(MyGraph& graph) {
     std::map<std::pair<Node*, Node*>, long long> dists;
@@ -10,7 +12,7 @@ std::map<std::pair<Node*, Node*>, long long> Floyd(MyGraph& graph) {
             } else if (graph.existsEdge(from, to)) {
                 dists[{from, to}] = graph.getEdgeWeight(from, to);
             } else {
-                dists[{from, to}] = INT_MAX;
+                dists[{from, to}] = inf;
             }
         }
     }
