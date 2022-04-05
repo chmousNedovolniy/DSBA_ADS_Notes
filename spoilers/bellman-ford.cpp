@@ -1,9 +1,11 @@
+const int inf = 1e9;
+
 // Works like Dijkstra algo, finds all  dists between startNode and other nodes, returns them in map
 std::map<Node*, int> BellmanFord(MyGraph& graph, Node* startNode, Node* endNode) {
     std::map<Node*, int> distance;
 
     for (auto v: graph.getNodes()) {
-        distance[v] = INT_MAX / 2;
+        distance[v] = inf;
     }
 
     distance[startNode] = 0;
