@@ -1,5 +1,5 @@
 # DSBA_ADS_Notes
-Hope it helps a bit
+Hope it helps a bit for the upcoming test
 
 - В [basics.md](basics.md) лежит описание базовых терминов и способов хранения графа
 - [graph.cpp](graph.cpp) - верный помощник, копипастишь себе, пользуешься
